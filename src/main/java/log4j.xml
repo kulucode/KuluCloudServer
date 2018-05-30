@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">   
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">   
+    <!-- 控制台输出-->   
+    <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">   
+        <param name="Target" value="System.out" />   
+        <param name="Threshold" value="INFO" />   
+        <layout class="org.apache.log4j.PatternLayout">   
+            <param name="ConversionPattern"   
+                value="[%d{yyyy-MM-dd HH:mm:ss SSS}][%-p][%-c]   %m%n" />   
+        </layout>  
+        <!--  以下是过滤一些不需要输出的log信息 -->   
+        <filter class="org.apache.log4j.varia.StringMatchFilter">   
+            <param name="StringToMatch" value="org.apache.mina.filter.codec.ProtocolCodecFilter  - Processing a MESSAGE_RECEIVED" />   
+            <param name="AcceptOnMatch" value="true" />   
+        </filter>   
+    </appender>   
+ <!--文件输出 按照文件大小滚动文件-->   
+    <appender name="File" class="org.apache.log4j.RollingFileAppender">   
+        <param name="Append" value="true" />   
+        <param name="Threshold" value="INFO" />   
+        <param name="File" value=".\\watchsdk.log" />   
+        <param name="MaxFileSize" value="10MB" />   
+        <param name="MaxBackupIndex" value="15" />   
+        <layout class="org.apache.log4j.PatternLayout">   
+            <param name="ConversionPattern"   
+                 value="[%d{yyyy-MM-dd HH:mm:ss SSS}][%-p][%-c]   %m%n" />     
+        </layout>   
+        <filter class="org.apache.log4j.varia.StringMatchFilter">   
+            <param name="StringToMatch" value="org.apache.mina.filter.codec.ProtocolCodecFilter  - Processing a MESSAGE_RECEIVED" />   
+            <param name="AcceptOnMatch" value="false" />   
+        </filter>   
+    </appender>   
+<!-- 根loggr -->   
+    <root>   
+        <appender-ref ref="CONSOLE" />   
+        <appender-ref ref="File" />   
+    </root>   
+
+</log4j:configuration>
