@@ -69,8 +69,7 @@ public class MQCarMessage {
 			System.out.println("车载注册成功!");
 			msgBody = PacketTermRegister.formResponseMsgBody(msgSeq, PacketTermRegister.REG_SUCCESS, authKey);
 		} else {
-			msgBody = PacketTermRegister.formResponseMsgBody(msgSeq, PacketTermRegister.REG_CAR_NOTEXIST,
-					"kulu" + termId);
+			msgBody = PacketTermRegister.formResponseMsgBody(msgSeq, PacketTermRegister.REG_CAR_NOTEXIST, "kulu" + termId);
 		}
 		if (SocketHandler.tokenMap.containsKey(termId)) {
 			SocketHandler.userIds.remove(termId);
